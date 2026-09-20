@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Search Oracle JSON Relational Duality View documents.">
+<title th:text="${applicationName} + ' | Duality Search'">Duality
+	Search</title>
+<link rel="stylesheet" th:href="@{/assets/duality-workspace.css}"
+	href="/assets/duality-workspace.css">
+</head>
+<body>
+	<main class="page-shell duality-workspace">
+		<header class="app-header compact-header">
+			<div>
+				<p class="brand-kicker">MICRONAUT + ORACLE DATABASE</p>
+				<h1>Duality search</h1>
+				<p>
+					Search JSON fields in
+					<code>JDV_ORDER_DV.DATA</code>
+					with bound JSON_EXISTS predicates.
+				</p>
+			</div>
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Back
+				to workspace</a>
+		</header>
+		<nav class="workspace-nav" aria-label="Workspace sections">
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Connection
+				Check and Bootstrap</a><a class="button button-secondary"
+				th:href="@{/ui/read-compare}" href="/ui/read-compare">Read and
+				Compare</a><a class="button is-current" th:href="@{/ui/search}"
+				href="/ui/search">Duality Search</a><a
+				class="button button-secondary" th:href="@{/ui/documents}"
+				href="/ui/documents">Document Writes</a>
+		</nav>
+		<section class="panel" aria-labelledby="search-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">JSON relational duality search</p>
+					<h2 id="search-heading">Search document fields</h2>
+					<p class="section-copy">All entered criteria must match. The
+						defaults return seeded order 5001.</p>
+				</div>
+			</div>
+			<form id="document-search-form" class="search-form">
+				<label for="search-status">Status<select id="search-status"
+					name="status"><option value="">Any status</option>
+						<option value="PLACED">Placed</option>
+						<option value="PAID" selected>Paid</option>
+						<option value="PACKED">Packed</option>
+						<option value="SHIPPED">Shipped</option>
+						<option value="CANCELLED">Cancelled</option></select></label> <label
+					for="search-email">Customer email<input id="search-email"
+					name="customerEmail" type="email" value="asha.rao@example.com"></label>
+				<label for="search-sku">Line SKU<input id="search-sku"
+					name="sku" type="text" value="DB26AI-JSON"></label> <label
+					for="search-priority">Audit priority<select
+					id="search-priority" name="priority"><option value="">Any
+							priority</option>
+						<option value="expedite" selected>Expedite</option>
+						<option value="normal">Normal</option></select></label> <label for="search-channel">Preference
+					channel<select id="search-channel" name="preferenceChannel"><option
+							value="">Any channel</option>
+						<option value="mobile" selected>Mobile</option>
+						<option value="web">Web</option></select>
+				</label>
+				<button type="submit" class="button">Search documents</button>
+			</form>
+		</section>
+		<section class="panel search-result-panel"
+			aria-labelledby="matches-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Matches</p>
+					<h2 id="matches-heading">Document collection</h2>
+				</div>
+				<span class="status-chip" id="document-count">0</span>
+			</div>
+			<div id="order-list" class="record-list" aria-live="polite">
+				<p class="empty-state">Run a search to show matching documents.</p>
+			</div>
+		</section>
+		<section class="panel response-panel"
+			aria-labelledby="response-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Response</p>
+					<h2 id="response-heading">Server result</h2>
+				</div>
+				<button type="button" class="button button-secondary"
+					data-action="clear-output">Clear result</button>
+			</div>
+			<div id="response-meta" class="response-meta">Run a search to
+				inspect the server response.</div>
+			<pre id="response-output" tabindex="0" aria-live="polite">{}</pre>
+		</section>
+	</main>
+	<script th:src="@{/assets/duality-workspace.js}"
+		src="/assets/duality-workspace.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Micronaut workspace for Oracle JSON Relational Duality Views.">
+<title th:text="${applicationName}">Micronaut JSON Relational
+	Duality Views</title>
+<link rel="stylesheet" th:href="@{/assets/duality-workspace.css}"
+	href="/assets/duality-workspace.css">
+</head>
+<body>
+	<main class="page-shell duality-workspace">
+		<header class="app-header">
+			<div class="brand">
+				<p class="brand-kicker">MICRONAUT + ORACLE DATABASE</p>
+				<h1 th:text="${applicationName}">Micronaut JSON Relational
+					Duality Views</h1>
+				<p>Choose a task, run it, and inspect the Oracle response where
+					it belongs.</p>
+			</div>
+		</header>
+
+		<nav class="workspace-nav" aria-label="Workspace sections">
+			<button type="button" class="button button-secondary"
+				data-action="overview">Connection Check</button>
+			<button type="button" class="button" data-action="bootstrap">Bootstrap</button>
+			<a class="button button-secondary" th:href="@{/ui/read-compare}"
+				href="/ui/read-compare">Read and Compare</a> <a
+				class="button button-secondary" th:href="@{/ui/search}"
+				href="/ui/search">Duality Search</a> <a
+				class="button button-secondary" th:href="@{/ui/documents}"
+				href="/ui/documents">Document Writes</a>
+		</nav>
+
+		<section class="status-bar" aria-label="Workspace status">
+			<div>
+				<span>Connection</span><strong id="connection-value">Not
+					checked</strong>
+			</div>
+			<div>
+				<span>Seed documents</span><strong id="document-count">-</strong>
+			</div>
+			<div>
+				<span>Default order</span><strong th:text="${defaultOrderId}">5001</strong>
+			</div>
+			<div>
+				<span>Last request</span><strong id="last-request">Ready</strong>
+			</div>
+		</section>
+
+		<section class="task-grid" aria-label="Available tasks">
+			<a class="task-card" th:href="@{/ui/read-compare}"
+				href="/ui/read-compare">
+				<p class="eyebrow">Document collection</p>
+				<h2>Read and compare</h2>
+				<p>Load document collections, inspect mapped and raw JSON, and
+					compare order 5001 with its relational rows.</p> <span>Open read
+					workspace</span>
+			</a> <a class="task-card" th:href="@{/ui/search}" href="/ui/search">
+				<p class="eyebrow">JSON predicates</p>
+				<h2>Duality search</h2>
+				<p>Search fields in the duality document, including nested
+					objects and line-item arrays.</p> <span>Open search workspace</span>
+			</a> <a class="task-card" th:href="@{/ui/documents}" href="/ui/documents">
+				<p class="eyebrow">Updatable document</p>
+				<h2>Document writes</h2>
+				<p>Create, replace, delete, and test optimistic concurrency with
+					the isolated draft order.</p> <span>Open write workspace</span>
+			</a>
+		</section>
+
+		<section class="panel response-panel"
+			aria-labelledby="response-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Response</p>
+					<h2 id="response-heading">Server result</h2>
+				</div>
+			</div>
+			<div id="response-meta" class="response-meta">Run Connection
+				Check or Bootstrap to inspect its response.</div>
+			<pre id="response-output" tabindex="0" aria-live="polite">{}</pre>
+		</section>
+	</main>
+	<script th:src="@{/assets/duality-workspace.js}"
+		src="/assets/duality-workspace.js" defer></script>
+</body>
+</html>

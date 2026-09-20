@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Write Oracle JSON Relational Duality View documents.">
+<title th:text="${applicationName} + ' | Document Writes'">Document
+	Writes</title>
+<link rel="stylesheet" th:href="@{/assets/duality-workspace.css}"
+	href="/assets/duality-workspace.css">
+</head>
+<body>
+	<main class="page-shell duality-workspace">
+		<header class="app-header compact-header">
+			<div>
+				<p class="brand-kicker">MICRONAUT + ORACLE DATABASE</p>
+				<h1>Document writes</h1>
+				<p>Create, replace, delete, and deliberately test a stale ETAG
+					using the isolated draft order.</p>
+			</div>
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Back
+				to workspace</a>
+		</header>
+		<nav class="workspace-nav" aria-label="Workspace sections">
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Connection
+				Check and Bootstrap</a><a class="button button-secondary"
+				th:href="@{/ui/read-compare}" href="/ui/read-compare">Read and
+				Compare</a><a class="button button-secondary" th:href="@{/ui/search}"
+				href="/ui/search">Duality Search</a><a class="button is-current"
+				th:href="@{/ui/documents}" href="/ui/documents">Document Writes</a>
+		</nav>
+		<section class="panel" aria-labelledby="write-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Updatable document</p>
+					<h2 id="write-heading">Draft order 5010</h2>
+					<p class="section-copy">The default draft leaves the two seeded
+						orders unchanged.</p>
+				</div>
+				<div class="header-actions">
+					<button type="button" class="button button-secondary"
+						data-action="load-draft">Load draft</button>
+					<button type="button" class="button button-danger"
+						data-action="delete">Delete draft</button>
+				</div>
+			</div>
+			<div class="editor-layout">
+				<div class="editor-controls">
+					<label for="write-method">Write operation<select
+						id="write-method"><option value="POST"
+								data-description="Create the draft order. The ID must not already exist.">Create
+								document</option>
+							<option value="PUT"
+								data-description="Replace the draft order. The ID must already exist.">Replace
+								document</option></select></label>
+					<p id="write-description" class="form-help">Create the draft
+						order. The ID must not already exist.</p>
+					<label for="draft-id">Draft ID<input id="draft-id"
+						type="number" min="1" th:value="${defaultDraftId}" value="5010"></label><label
+						for="order-id">Order for ETAG check<input id="order-id"
+						type="number" min="1" th:value="${defaultOrderId}" value="5001"></label>
+					<button type="button" class="button" data-action="write-document">Run
+						document write</button>
+					<button type="button" class="button button-warning"
+						data-action="etag-conflict">Test stale ETAG</button>
+					<p class="form-help">The ETAG check changes order 5001, then
+						detects the stale document. Bootstrap afterward to restore the
+						seed data.</p>
+				</div>
+				<label for="document-editor" class="editor-label">Order
+					document JSON<textarea id="document-editor" spellcheck="false">{
+  "_id": 5010,
+  "orderNumber": "PO-26AI-5010",
+  "status": "PLACED",
+  "placedAt": "2026-08-28T14:00:00",
+  "customer": { "_id": 1002, "name": "Morgan Lee", "email": "morgan.lee@example.com", "loyaltyStatus": "GOLD", "preferences": { "channel": "web", "newsletter": false, "fulfillment": { "allowSubstitutions": true, "preferredWarehouse": "LHR-2" } } },
+  "lines": [{ "_id": 9010, "sku": "UCP-OPS", "description": "Oracle UCP operations checklist", "quantity": 2, "unitPrice": 19.00, "attributes": { "color": "green", "format": "laminated", "warehouse": "LHR-2" } }],
+  "shipments": [{ "_id": 7010, "carrier": "DHL", "trackingNumber": "DHL-26AI-0010", "shippedAt": null, "deliveryWindow": { "from": "2026-08-29T09:00:00", "to": "2026-08-29T13:00:00", "timezone": "Europe/Dublin" } }],
+  "auditTrail": { "createdBy": "Thymeleaf workspace", "priority": "normal", "events": [{ "type": "CREATED", "at": "2026-08-28T14:00:00" }] }
+}</textarea>
+				</label>
+			</div>
+		</section>
+		<section class="panel response-panel"
+			aria-labelledby="response-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Response</p>
+					<h2 id="response-heading">Server result</h2>
+				</div>
+				<button type="button" class="button button-secondary"
+					data-action="clear-output">Clear result</button>
+			</div>
+			<div id="response-meta" class="response-meta">Run a document
+				operation to inspect the server response.</div>
+			<pre id="response-output" tabindex="0" aria-live="polite">{}</pre>
+		</section>
+	</main>
+	<script th:src="@{/assets/duality-workspace.js}"
+		src="/assets/duality-workspace.js" defer></script>
+</body>
+</html>

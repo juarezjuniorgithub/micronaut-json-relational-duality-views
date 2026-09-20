@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:micronaut:config:io.micronaut.oracle.dev.OracleClientInfoConfiguration",
+  "title": "Oracle client information configuration",
+  "description": "Declares the Micronaut Data Oracle client-info switch that is read dynamically by the JDBC connection customizer.",
+  "x-micronaut": {
+    "prefix": "datasources",
+    "type": "io.micronaut.oracle.dev.OracleClientInfoConfiguration",
+    "kind": "each-property",
+    "container": "map"
+  },
+  "type": "object",
+  "minProperties": 1,
+  "additionalProperties": {
+    "$ref": "#/$defs/Entry"
+  },
+  "$defs": {
+    "Entry": {
+      "type": "object",
+      "properties": {
+        "enable-oracle-client-info": {
+          "type": "boolean",
+          "description": "Enables Micronaut Data Oracle OCSID client-info customization for this datasource.",
+          "x-micronaut-javaType": "java.lang.Boolean",
+          "x-micronaut-sourceType": "io.micronaut.data.connection.jdbc.oracle.OracleClientInfoCondition",
+          "x-micronaut-path": "datasources.*.enable-oracle-client-info"
+        }
+      }
+    }
+  }
+}

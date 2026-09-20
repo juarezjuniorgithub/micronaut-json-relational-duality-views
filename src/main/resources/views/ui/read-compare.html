@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Read and compare Oracle JSON Relational Duality View documents.">
+<title th:text="${applicationName} + ' | Read and Compare'">Read
+	and Compare</title>
+<link rel="stylesheet" th:href="@{/assets/duality-workspace.css}"
+	href="/assets/duality-workspace.css">
+</head>
+<body>
+	<main class="page-shell duality-workspace">
+		<header class="app-header compact-header">
+			<div>
+				<p class="brand-kicker">MICRONAUT + ORACLE DATABASE</p>
+				<h1>Read and compare</h1>
+				<p>Explore the same purchase order as a mapped document, raw
+					duality-view JSON, and normalized relational data.</p>
+			</div>
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Back
+				to workspace</a>
+		</header>
+		<nav class="workspace-nav" aria-label="Workspace sections">
+			<a class="button button-secondary" th:href="@{/ui}" href="/ui">Connection
+				Check and Bootstrap</a> <a class="button is-current"
+				th:href="@{/ui/read-compare}" href="/ui/read-compare">Read and
+				Compare</a> <a class="button button-secondary" th:href="@{/ui/search}"
+				href="/ui/search">Duality Search</a> <a
+				class="button button-secondary" th:href="@{/ui/documents}"
+				href="/ui/documents">Document Writes</a>
+		</nav>
+
+		<section class="panel" aria-labelledby="collection-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Document collection</p>
+					<h2 id="collection-heading">Orders</h2>
+				</div>
+				<span class="status-chip" id="selected-status">Ready</span>
+			</div>
+			<form id="filter-form" class="filter-form">
+				<label for="status-filter">Filter status <select
+					id="status-filter" name="status">
+						<option value="" data-description="Show every order document.">All
+							statuses</option>
+						<option value="PLACED"
+							data-description="Show orders that await payment.">Placed</option>
+						<option value="PAID"
+							data-description="Show paid orders ready for fulfillment.">Paid</option>
+						<option value="PACKED"
+							data-description="Show orders packed for delivery.">Packed</option>
+						<option value="SHIPPED"
+							data-description="Show orders handed to a carrier.">Shipped</option>
+						<option value="CANCELLED"
+							data-description="Show cancelled orders.">Cancelled</option>
+				</select>
+				</label>
+				<button type="submit" class="button">Load orders</button>
+			</form>
+			<p id="filter-description" class="form-help">Show every order
+				document.</p>
+			<div id="order-list" class="record-list" aria-live="polite">
+				<p class="empty-state">Load orders after bootstrapping the
+					schema.</p>
+			</div>
+		</section>
+
+		<section class="panel" aria-labelledby="order-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Selected document</p>
+					<h2 id="order-heading">Order tools</h2>
+				</div>
+				<label class="compact-field" for="order-id">Order ID<input
+					id="order-id" type="number" min="1" th:value="${defaultOrderId}"
+					value="5001"></label>
+			</div>
+			<div class="command-grid">
+				<button type="button" class="command" data-action="order">
+					<strong>Mapped document</strong><span>Inspect the
+						Java-mapped document without changing data.</span>
+				</button>
+				<button type="button" class="command" data-action="raw-json">
+					<strong>Raw JSON</strong><span>Read Oracle's JSON document
+						from the duality view.</span>
+				</button>
+				<button type="button" class="command" data-action="relational">
+					<strong>Relational snapshot</strong><span>Compare the same
+						order as normalized rows.</span>
+				</button>
+				<button type="button" class="command" data-action="open-summaries">
+					<strong>Open summaries</strong><span>List documents from the
+						read-only open-order view.</span>
+				</button>
+				<button type="button" class="command" data-action="ddl">
+					<strong>View DDL</strong><span>Inspect the SQL that defines
+						both duality views.</span>
+				</button>
+			</div>
+			<form id="status-form" class="inline-form">
+				<label for="status-value">Set lifecycle status <select
+					id="status-value"><option value="PLACED"
+							data-description="Mark the selected order as placed and awaiting payment.">Placed</option>
+						<option value="PAID"
+							data-description="Mark the selected order as paid and ready for fulfillment."
+							selected>Paid</option>
+						<option value="PACKED"
+							data-description="Mark the selected order as packed for delivery.">Packed</option>
+						<option value="SHIPPED"
+							data-description="Mark the selected order as handed to the carrier.">Shipped</option>
+						<option value="CANCELLED"
+							data-description="Cancel the selected order before fulfillment.">Cancelled</option></select>
+				</label>
+				<p id="status-description" class="form-help">Mark the selected
+					order as paid and ready for fulfillment.</p>
+				<button type="submit" class="button button-secondary">Apply
+					status</button>
+			</form>
+		</section>
+
+		<section class="panel response-panel"
+			aria-labelledby="response-heading">
+			<div class="section-heading">
+				<div>
+					<p class="eyebrow">Response</p>
+					<h2 id="response-heading">Server result</h2>
+				</div>
+				<button type="button" class="button button-secondary"
+					data-action="clear-output">Clear result</button>
+			</div>
+			<div id="response-meta" class="response-meta">Select a read
+				action to inspect its response.</div>
+			<pre id="response-output" tabindex="0" aria-live="polite">{}</pre>
+		</section>
+	</main>
+	<script th:src="@{/assets/duality-workspace.js}"
+		src="/assets/duality-workspace.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: io.micronaut.oracle.dev
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [app-name, http-client-test, java, java-application, jdbc-ucp, junit, logback, maven, maven-enforcer-plugin, micronaut-aot, micronaut-configuration-validation-gradle-plugin, micronaut-http-validation, micronaut-processing-compiler-args, netty-server, oracle, properties, readme, serialization-jackson, shade, static-resources, test-resources]
