@@ -1,2 +1,2 @@
 # micronaut-json-relational-duality-views
-[]()
+[JSON Relational Duality Views with Micronaut, Micronaut Data, Oracle JDBC/UCP and the Oracle Database 26ai](https://medium.com/@juarezjunior/json-relational-duality-views-with-micronaut-micronaut-data-oracle-jdbc-ucp-and-the-oracle-227bfb8590b8)
